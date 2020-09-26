@@ -1,8 +1,9 @@
 var char;
 function startGame() {
-  char = new makeCharacter(30, 30, "#ffffff", 510, 300, 1);
+  char = new makeCharacter(30, 30, "gray", 510, 300, 1);
   game.start();
 }
+
 var game = {
   canvas: document.createElement("canvas"),
   start: function () {
@@ -43,7 +44,6 @@ function makeCharacter(width, height, color, x, y, size) {
 function updateGame() {
   game.clear();
   char.update();
-  char.overlap(box);
   char.die();
 }
 
@@ -67,19 +67,23 @@ function moveright() {
 }
 
 document.onkeydown = function (e) {
-  switch (e.keyCode) {
-    case 37: //left
+  switch (e.code) {
+    case "ArrowLeft": //left
       moveleft();
       break;
-    case 38: //up
+    case "ArrowUp": //up
       moveup();
       break;
-    case 39: //right
+    case "ArrowRight": //right
       moveright();
       break;
-    case 40: //down
+    case "ArrowDown": //down
       movedown();
       break;
   }
+  console.log(e);
 };
 
+function homepage() {
+  location.href = "index.html";
+}
