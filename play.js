@@ -1,6 +1,6 @@
 var char;
 function startGame() {
-  char = new makeCharacter(30, 30, "gray", 510, 300, 1);
+  char = new makeCharacter(200, 200, "gray", 510, 300, 1);
   game.start();
 }
 
@@ -25,8 +25,13 @@ function makeCharacter(width, height, color, x, y, size) {
   this.y = y;
   this.update = function () {
     ctx = game.context;
-    ctx.fillStyle = color;
-    ctx.fillRect(this.x, this.y, this.width, this.height);
+    //ctx.fillStyle = color;
+    var img = new Image();
+    img.src = "SBH_RUN_RIGHT.gif";
+    //var gif = new GIF();
+    //gif.load("SBH_RUN.gif");
+    ctx.drawImage(img, this.x, this.y, this.width, this.height);
+    //ctx.fillRect(this.x, this.y, this.width, this.height);
   };
 
   this.overlap = function (obj) {
@@ -38,7 +43,7 @@ function makeCharacter(width, height, color, x, y, size) {
     }
   };
 
-  this.die = function () { };
+  this.die = function () {};
 }
 
 function updateGame() {
