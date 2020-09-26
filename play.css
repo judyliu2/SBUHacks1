@@ -6,8 +6,8 @@ canvas {
   background-size: cover;
   background-position: 0 0;
   background-repeat: repeat-x;
-  -webkit-animation: moving 5s linear infinite;
   animation: moving 5s linear infinite;
+  
 }
 .img-area{
   position: absolute;
@@ -20,6 +20,6 @@ canvas {
     background-position: 0 0;
   }
   to{
-    background-position:100% 0 ;
+    background-position:1000000% 0 ;
   }
 }
