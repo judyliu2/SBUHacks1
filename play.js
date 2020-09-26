@@ -29,12 +29,12 @@ function makeCharacter(width, height, color, x, y, size) {
   this.frame = 4;
   this.images = [];
 
-  this.initializeCharacter = function (){
-    for(var i = 0; i < 5; i++){
+  this.initializeCharacter = function () {
+    for (var i = 0; i < 5; i++) {
       this.images[i] = new Image();
-      this.images[i].src = '00' + i + '.png';
+      this.images[i].src = "00" + i + ".png";
     }
-  }
+  };
 
   this.update = function () {
     ctx = game.context;
@@ -72,18 +72,24 @@ function moveup() {
 }
 
 function movedown() {
-  char.y += 10;
-  char.frame = (char.frame + 1) % 5;
+  if (char.y < canvas.height - 240) {
+    char.y += 10;
+    char.frame = (char.frame + 1) % 5;
+  }
 }
 
 function moveleft() {
-  char.x -= 10;
-  char.frame = (char.frame + 1) % 5;
+  if (char.x > 0) {
+    char.x -= 10;
+    char.frame = (char.frame + 1) % 5;
+  }
 }
 
 function moveright() {
-  char.x += 10;
-  char.frame = (char.frame + 1) % 5;
+  if (char.x < canvas.width - 200) {
+    char.x += 10;
+    char.frame = (char.frame + 1) % 5;
+  }
 }
 
 document.onkeydown = function (e) {
