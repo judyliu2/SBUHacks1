@@ -1,6 +1,6 @@
 var char;
 function startGame() {
-  char = new makeCharacter(150, 300, "gray", 510, 300, 1);
+  char = new makeCharacter(100, 180, "gray", 0, 0, 1);
   char.initializeCharacter();
   game.start();
 }
@@ -21,11 +21,14 @@ var game = {
 };
 
 function printMousePos(event) {
-  alert([event.x, event.y] + "\n char dude x:" + [char.x - 75, char.x - 75 + char.width] + "  y:" + [char.y - 150, char.y - 150+char.height]);
-  if ((char.x - 75) < event.x && event.x <= (char.x - 75) + char.width
-    && (char.y - 150) < event.y && event.y <= (char.y - 150) + char.height){
-    alert(" X match");
-  }
+  xOffset = 50;
+  yOffset = 50;
+  alert([event.x, event.y] + "\n char dude x:" + [char.x + xOffset, char.x + xOffset + char.width] 
+  + "  y:" + [char.y + yOffset, char.y + yOffset + char.height]);
+  if (withinBounds([char.x + xOffset, char.x + xOffset + char.width], event.x)
+    && withinBounds([char.y + yOffset, char.y + yOffset + char.height], event.y)){
+      alert("got");
+    }
 }
 
 function withinBounds(aList, num){
@@ -48,6 +51,7 @@ function makeCharacter(width, height, color, x, y, size) {
   this.y = y;
   this.health = 100;
   this.frame = 4;
+  this.hasCollided = false;
   this.images = [];
 
   this.initializeCharacter = function () {
@@ -65,14 +69,17 @@ function makeCharacter(width, height, color, x, y, size) {
 
   this.overlap = function (obj) {
     //console.log(obj.x);
-    charXRange = [this.x - 75, this.x + 75];
-    charYRange = [this.y - 150, this.y +150];
+    xOffset = 50;
+    yOffset = 50;
+    charXRange = [char.x + xOffset, char.x + xOffset + char.width];
+    charYRange = [char.y + yOffset, char.y + yOffset + char.height];
     topLeft = withinBounds(charXRange, obj.x) && withinBounds(charYRange, obj.y);
     topRight = withinBounds(charXRange, obj.x + 50) && withinBounds(charYRange, obj.y);
     bottomLeft = withinBounds(charXRange, obj.x) && withinBounds(charYRange, obj.y + 50);
     bottomRight = withinBounds(charXRange, obj.x + 50) && withinBounds(charYRange, obj.y + 50);
-    if(topLeft || topRight || bottomLeft || bottomRight){
+    if((topLeft || topRight || bottomLeft || bottomRight) && !this.hasCollided){
       alert("collided");
+      this.hasCollided = true;
     }
   };
 
@@ -91,28 +98,28 @@ function updateGame() {
 
 function moveup() {
   if (char.y > 0) {
-    char.y -= 10;
+    char.y -= 5;
     char.frame = (char.frame + 1) % 5;
   }
 }
 
 function movedown() {
   if (char.y < canvas.height - 240) {
-    char.y += 10;
+    char.y += 5;
     char.frame = (char.frame + 1) % 5;
   }
 }
 
 function moveleft() {
   if (char.x > 0) {
-    char.x -= 10;
+    char.x -= 5;
     char.frame = (char.frame + 1) % 5;
   }
 }
 
 function moveright() {
   if (char.x < canvas.width - 200) {
-    char.x += 10;
+    char.x += 5;
     char.frame = (char.frame + 1) % 5;
   }
 }
