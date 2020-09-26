@@ -3,7 +3,7 @@ h1 {
   width: 944px;
   height: 244px;
   left: 270px;
-  
+  top: -15px;
 
   font-family: Mate;
   font-style: normal;
@@ -66,19 +66,28 @@ h1 {
   border-radius: 78px;
   
 }
-body {
+canvas {
   background-image: url("SBH_homepage 1.png");
 }
 #overlay {
-  position: fixed;
+  position: absolute;
   display: none;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
+  width: 1440px;
+  height: 1024px;
+  top: 9px;
+  left: 4px;
   right: 0;
   bottom: 0;
   background-image: url("instructions.png");
   z-index: 2;
   cursor: pointer;
+}
+body {
+  width: 1440px;
+  height: 1024px;
+}
+html {
+
+  width: 1440px;
+  height: 1024px;
 }
