@@ -43,7 +43,11 @@ function makeCharacter(width, height, color, x, y, size) {
     }
   };
 
-  this.die = function () {};
+  this.die = function () {
+    if (this.health === 0 || this.health < 0) {
+      alert("dead");
+    }
+  };
 }
 
 function updateGame() {
