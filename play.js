@@ -68,11 +68,7 @@ function makeCharacter(width, height, color, x, y, size) {
   };
 
   this.update = function () {
-<<<<<<< HEAD
     objects.forEach((ele) => this.overlap(ele));
-=======
-    objects.forEach(ele => this.overlap(ele));
->>>>>>> noble
     ctx = game.context;
     ctx.drawImage(this.images[this.frame], this.x, this.y);
   };
