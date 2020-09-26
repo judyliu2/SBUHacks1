@@ -1,6 +1,6 @@
 var char;
 function startGame() {
-  char = new makeCharacter(30, 30, "#000000", 510, 300, 1);
+  char = new makeCharacter(30, 30, "#ffffff", 510, 300, 1);
   game.start();
 }
 var game = {
