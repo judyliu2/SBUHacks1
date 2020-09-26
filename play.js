@@ -1,6 +1,6 @@
 var char;
 function startGame() {
-  char = new makeCharacter(30, 30, "gray", 510, 300, 1);
+  char = new makeCharacter(150, 300, "gray", 510, 300, 1);
   char.initializeCharacter();
   game.start();
 }
@@ -20,6 +20,10 @@ var game = {
   },
 };
 
+
+
+/*         Character Creation        */
+
 function makeCharacter(width, height, color, x, y, size) {
   this.width = width;
   this.height = height;
@@ -37,16 +41,16 @@ function makeCharacter(width, height, color, x, y, size) {
   };
 
   this.update = function () {
+    objects.forEach(ele => this.overlap(ele));
     ctx = game.context;
     ctx.drawImage(this.images[this.frame], this.x, this.y);
   };
 
   this.overlap = function (obj) {
-    if (
-      (this.x > obj.x && this.x < obj.x + obj.width) ||
-      (this.y > obj.y && this.y < obj.y + obj.height)
-    ) {
-      alert("OVELAP");
+    console.log(obj.x);
+    if (0 <= (obj.x) - this.x && (obj.x) - this.x <= this.width 
+      && 0 <= (obj.y) - this.y && (obj.y) - this.y <= this.height){
+        console.log("collision");
     }
   };
 
@@ -63,7 +67,6 @@ function updateGame() {
   char.die();
 }
 
-//cant move backwards
 function moveup() {
   if (char.y > 0) {
     char.y -= 10;
@@ -125,6 +128,10 @@ document.onkeydown = function (e) {
 function homepage() {
   location.href = "index.html";
 }
+
+
+
+/*         Object Creation        */
 
 // newly spawned objects start at Y=25
 var spawnLineY = 1500;
