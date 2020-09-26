@@ -20,12 +20,6 @@ var game = {
   },
 };
 
-function drawImage(image, x, y, scale, rot) {
-  ctx.setTransform(scale, 0, 0, scale, x, y);
-  ctx.rotate(rot);
-  ctx.drawImage(image, -image.width / 2, -image.height / 2);
-}
-
 function makeCharacter(width, height, color, x, y, size) {
   this.width = width;
   this.height = height;
@@ -93,7 +87,7 @@ function moveright() {
 }
 
 document.onkeydown = function (e) {
-  switch (e.code) {
+  switch (e.key) {
     case "ArrowLeft": //left
       moveleft();
       break;
@@ -105,6 +99,18 @@ document.onkeydown = function (e) {
       break;
     case "ArrowDown": //down
       movedown();
+      break;
+    case "w":
+      moveup();
+      break;
+    case "a":
+      moveleft();
+      break;
+    case "s":
+      movedown();
+      break;
+    case "d":
+      moveright();
       break;
   }
   console.log(e);
@@ -175,6 +181,7 @@ function animate() {
 
   // clear the canvas so all objects can be
   // redrawn in new positions
+  ctx = game.context;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   char.update();
   // move each object down the canvas
