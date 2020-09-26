@@ -29,16 +29,16 @@ function withinBounds(aList, num) {
 function printMousePos(event) {
   xOffset = 50;
   yOffset = 50;
-  alert([event.x, event.y] + "\n char dude x:" + [char.x + xOffset, char.x + xOffset + char.width] 
-  + "  y:" + [char.y + yOffset, char.y + yOffset + char.height]);
+  alert([event.x, event.y] + "\n char dude x:" + [char.x + xOffset, char.x + xOffset + char.width]
+    + "  y:" + [char.y + yOffset, char.y + yOffset + char.height]);
   if (withinBounds([char.x + xOffset, char.x + xOffset + char.width], event.x)
-    && withinBounds([char.y + yOffset, char.y + yOffset + char.height], event.y)){
-      alert("got");
-    }
+    && withinBounds([char.y + yOffset, char.y + yOffset + char.height], event.y)) {
+    alert("got");
+  }
 }
 
-function withinBounds(aList, num){
-  if (aList[0] < num && num < aList[1]){
+function withinBounds(aList, num) {
+  if (aList[0] < num && num < aList[1]) {
     return true;
   }
   return false;
@@ -83,7 +83,6 @@ function makeCharacter(width, height, color, x, y, size) {
     yOffset = 50;
     charXRange = [char.x + xOffset, char.x + xOffset + char.width];
     charYRange = [char.y + yOffset, char.y + yOffset + char.height];
-<<<<<<< HEAD
     topLeft =
       withinBounds(charXRange, obj.x) && withinBounds(charYRange, obj.y);
     topRight =
@@ -97,13 +96,6 @@ function makeCharacter(width, height, color, x, y, size) {
       (topLeft || topRight || bottomLeft || bottomRight) &&
       !this.hasCollided
     ) {
-=======
-    topLeft = withinBounds(charXRange, obj.x) && withinBounds(charYRange, obj.y);
-    topRight = withinBounds(charXRange, obj.x + 50) && withinBounds(charYRange, obj.y);
-    bottomLeft = withinBounds(charXRange, obj.x) && withinBounds(charYRange, obj.y + 50);
-    bottomRight = withinBounds(charXRange, obj.x + 50) && withinBounds(charYRange, obj.y + 50);
-    if((topLeft || topRight || bottomLeft || bottomRight) && !this.hasCollided){
->>>>>>> noble
       alert("collided");
       this.hasCollided = true;
     }
