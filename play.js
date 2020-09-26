@@ -19,6 +19,12 @@ var game = {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
   },
 };
+function withinBounds(aList, num) {
+  if (aList[0] < num && num < aList[1]) {
+    return true;
+  }
+  return false;
+}
 
 function makeCharacter(width, height, color, x, y, size) {
   this.width = width;
@@ -37,16 +43,32 @@ function makeCharacter(width, height, color, x, y, size) {
   };
 
   this.update = function () {
+    objects.forEach((ele) => this.overlap(ele));
     ctx = game.context;
     ctx.drawImage(this.images[this.frame], this.x, this.y);
   };
 
   this.overlap = function (obj) {
+    //console.log(obj.x);
+    xOffset = 50;
+    yOffset = 50;
+    charXRange = [char.x + xOffset, char.x + xOffset + char.width];
+    charYRange = [char.y + yOffset, char.y + yOffset + char.height];
+    topLeft =
+      withinBounds(charXRange, obj.x) && withinBounds(charYRange, obj.y);
+    topRight =
+      withinBounds(charXRange, obj.x + 50) && withinBounds(charYRange, obj.y);
+    bottomLeft =
+      withinBounds(charXRange, obj.x) && withinBounds(charYRange, obj.y + 50);
+    bottomRight =
+      withinBounds(charXRange, obj.x + 50) &&
+      withinBounds(charYRange, obj.y + 50);
     if (
-      (this.x > obj.x && this.x < obj.x + obj.width) ||
-      (this.y > obj.y && this.y < obj.y + obj.height)
+      (topLeft || topRight || bottomLeft || bottomRight) &&
+      !this.hasCollided
     ) {
-      alert("OVELAP");
+      alert("collided");
+      this.hasCollided = true;
     }
   };
 
