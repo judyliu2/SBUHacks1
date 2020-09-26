@@ -1,6 +1,6 @@
 var char;
 function startGame() {
-  char = new makeCharacter(30, 30, "#000000", 510, 300, 1);
+  char = new makeCharacter(30, 30, "gray", 510, 300, 1);
   game.start();
 }
 
@@ -45,10 +45,6 @@ function updateGame() {
   game.clear();
   char.update();
   char.die();
-  game.context.fillStyle = 'gray';
-  game.context.fillRect(50, 20, 100, 50);
-  game.context.fillStyle = 'black';
-  game.context.strokeText("Return", 30, 20);
 }
 
 //cant move backwards
@@ -71,32 +67,23 @@ function moveright() {
 }
 
 document.onkeydown = function (e) {
-  switch (e) {
-    case 37: //left
+  switch (e.code) {
+    case "ArrowLeft": //left
       moveleft();
       break;
-    case 38: //up
+    case "ArrowUp": //up
       moveup();
       break;
-    case 39: //right
+    case "ArrowRight": //right
       moveright();
       break;
-    case 40: //down
+    case "ArrowDown": //down
       movedown();
       break;
   }
+  console.log(e);
 };
 
-// Return to homepage
-returnbutton = [30, 20, 100, 50];
-game.canvas.addEventListener('click', function(event) {
-  if (
-    event.x > returnbutton[0] &&
-    event.x < returnbutton[0] + returnbutton[2] &&
-    event.y > returnbutton[1] &&
-    event.y < returnbutton[1] + returnbutton[3]
-  ){
-    location.href = "index.html";
-  }
-  //console.log([event.x, event.y]);
-});
+function homepage(){
+  location.href = "index.html";
+}
