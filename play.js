@@ -1,6 +1,7 @@
 var char;
 function startGame() {
-  char = new makeCharacter(200, 200, "gray", 510, 300, 1);
+  char = new makeCharacter(30, 30, "gray", 510, 300, 1);
+  char.initializeCharacter();
   game.start();
 }
 
@@ -19,20 +20,31 @@ var game = {
   },
 };
 
+function drawImage(image, x, y, scale, rot) {
+  ctx.setTransform(scale, 0, 0, scale, x, y);
+  ctx.rotate(rot);
+  ctx.drawImage(image, -image.width / 2, -image.height / 2);
+}
+
 function makeCharacter(width, height, color, x, y, size) {
   this.width = width;
   this.height = height;
   this.x = x;
   this.y = y;
+  this.health = 100;
+  this.frame = 4;
+  this.images = [];
+
+  this.initializeCharacter = function (){
+    for(var i = 0; i < 5; i++){
+      this.images[i] = new Image();
+      this.images[i].src = '00' + i + '.png';
+    }
+  }
+
   this.update = function () {
     ctx = game.context;
-    //ctx.fillStyle = color;
-    var img = new Image();
-    img.src = "SBH_RUN_RIGHT.gif";
-    //var gif = new GIF();
-    //gif.load("SBH_RUN.gif");
-    ctx.drawImage(img, this.x, this.y, this.width, this.height);
-    //ctx.fillRect(this.x, this.y, this.width, this.height);
+    ctx.drawImage(this.images[this.frame], this.x, this.y);
   };
 
   this.overlap = function (obj) {
@@ -61,19 +73,23 @@ function updateGame() {
 function moveup() {
   if (char.y > 0) {
     char.y -= 10;
+    char.frame = (char.frame + 1) % 5;
   }
 }
 
 function movedown() {
   char.y += 10;
+  char.frame = (char.frame + 1) % 5;
 }
 
 function moveleft() {
   char.x -= 10;
+  char.frame = (char.frame + 1) % 5;
 }
 
 function moveright() {
   char.x += 10;
+  char.frame = (char.frame + 1) % 5;
 }
 
 document.onkeydown = function (e) {
