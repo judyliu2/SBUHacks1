@@ -3,7 +3,7 @@ var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext('2d');
 
 // newly spawned objects start at Y=25
-var spawnLineY = 25;
+var spawnLineY = 1000;
 
 // spawn a new object every 1500ms
 var spawnRate = 1500;
@@ -29,12 +29,6 @@ function spawnRandomObject() {
   // select a random type for this new object
   var t;
 
-  // About Math.random()
-  // Math.random() generates a semi-random number
-  // between 0-1. So to randomly decide if the next object
-  // will be A or B, we say if the random# is 0-.49 we
-  // create A and if the random# is .50-1.00 we create B
-
   if (Math.random() < 0.50) {
     t = "red";
   } else {
@@ -46,9 +40,9 @@ function spawnRandomObject() {
     // set this objects type
     type: t,
     // set x randomly but at least 15px off the canvas edges
-    x: Math.random() * (canvas.width - 30) + 15,
+    y: Math.random() * (canvas.width - 30) + 15,
     // set y to start on the line where objects are spawned
-    y: spawnLineY,
+    x: spawnLineY,
   }
 
   // add the new object to the objects[] array
@@ -75,16 +69,11 @@ function animate() {
   // redrawn in new positions
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // draw the line where new objects are spawned
-  ctx.beginPath();
-  ctx.moveTo(0, spawnLineY);
-  ctx.lineTo(canvas.width, spawnLineY);
-  ctx.stroke();
 
   // move each object down the canvas
   for (var i = 0; i < objects.length; i++) {
     var object = objects[i];
-    object.y += spawnRateOfDescent;
+    object.x -= spawnRateOfDescent;
     ctx.beginPath();
     ctx.arc(object.x, object.y, 8, 0, Math.PI * 2);
     ctx.closePath();
