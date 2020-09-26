@@ -37,7 +37,7 @@ function makeCharacter(width, height, color, x, y, size) {
     }
   };
 
-  this.die = function () {};
+  this.die = function () { };
 }
 
 function updateGame() {
@@ -82,3 +82,4 @@ document.onkeydown = function (e) {
       break;
   }
 };
+

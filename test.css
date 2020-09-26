@@ -1,14 +1,11 @@
-body{
-  margin: 0;
-  padding: 0;
-}
-.wrapper {
+canvas {
+  border: 1px solid #000000;
   position: relative;
   background: url(SBH_homepage\ 1.png);
   height: 100vh;
   background-size: cover;
-  background-position:0 0 ;
-  background-repeat: repeat-x ;
+  background-position: 0 0;
+  background-repeat: repeat-x;
   -webkit-animation: moving .5s linear infinite;
   animation: moving .5s linear infinite;
 }
