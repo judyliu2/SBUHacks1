@@ -20,6 +20,23 @@ var game = {
   },
 };
 
+function printMousePos(event) {
+  alert([event.x, event.y] + "\n char dude x:" + [char.x - 75, char.x - 75 + char.width] + "  y:" + [char.y - 150, char.y - 150+char.height]);
+  if ((char.x - 75) < event.x && event.x <= (char.x - 75) + char.width
+    && (char.y - 150) < event.y && event.y <= (char.y - 150) + char.height){
+    alert(" X match");
+  }
+}
+
+function withinBounds(aList, num){
+  if (aList[0] < num && num < aList[1]){
+    return true;
+  }
+  return false;
+}
+
+document.addEventListener("click", printMousePos);
+
 
 
 /*         Character Creation        */
@@ -47,10 +64,15 @@ function makeCharacter(width, height, color, x, y, size) {
   };
 
   this.overlap = function (obj) {
-    console.log(obj.x);
-    if (0 <= (obj.x) - this.x && (obj.x) - this.x <= this.width 
-      && 0 <= (obj.y) - this.y && (obj.y) - this.y <= this.height){
-        console.log("collision");
+    //console.log(obj.x);
+    charXRange = [this.x - 75, this.x + 75];
+    charYRange = [this.y - 150, this.y +150];
+    topLeft = withinBounds(charXRange, obj.x) && withinBounds(charYRange, obj.y);
+    topRight = withinBounds(charXRange, obj.x + 50) && withinBounds(charYRange, obj.y);
+    bottomLeft = withinBounds(charXRange, obj.x) && withinBounds(charYRange, obj.y + 50);
+    bottomRight = withinBounds(charXRange, obj.x + 50) && withinBounds(charYRange, obj.y + 50);
+    if(topLeft || topRight || bottomLeft || bottomRight){
+      alert("collided");
     }
   };
 
@@ -122,7 +144,7 @@ document.onkeydown = function (e) {
       moveright();
       break;
   }
-  console.log(e);
+  //console.log(e);
 };
 
 function homepage() {
