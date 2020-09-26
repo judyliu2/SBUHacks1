@@ -6,7 +6,7 @@ canvas {
   background-size: cover;
   background-position: 0 0;
   background-repeat: repeat-x;
-  animation: moving 5s linear infinite;
+  animation: moving 3600s linear infinite;
   
 }
 .img-area{
