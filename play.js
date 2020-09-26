@@ -22,20 +22,16 @@ function makeCharacter(width, height, color, x, y, size) {
   this.height = height;
   this.x = x;
   this.y = y;
-  this.speedX = 0;
-  this.speedY = 0;
   this.update = function () {
     ctx = game.context;
     ctx.fillStyle = color;
-    this.x += this.speedX;
-    this.y += this.speedY;
     ctx.fillRect(this.x, this.y, this.width, this.height);
   };
 
-  this.overlap = function (b) {
+  this.overlap = function (obj) {
     if (
-      (this.x > b.x && this.x < b.x + 30) ||
-      (this.y > b.y && this.y < b.y + 30)
+      (this.x > obj.x && this.x < obj.x + obj.width) ||
+      (this.y > obj.y && this.y < obj.y + obj.height)
     ) {
       alert("OVELAP");
     }
@@ -53,21 +49,21 @@ function updateGame() {
 
 //cant move backwards
 function moveup() {
-  if (char.x > 0) {
-    char.speedY -= 10;
+  if (char.y > 0) {
+    char.y -= 10;
   }
 }
 
 function movedown() {
-  char.speedY += 10;
+  char.y += 10;
 }
 
 function moveleft() {
-  char.speedX -= 10;
+  char.x -= 10;
 }
 
 function moveright() {
-  char.speedX += 10;
+  char.x += 10;
 }
 
 document.onkeydown = function (e) {
