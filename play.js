@@ -116,6 +116,12 @@ var objects = [];
 // save the starting time (used to calc elapsed time)
 var startTime = Date.now();
 
+var mask = new Image();
+mask.src = "SBH_mask.png";
+
+var rona = new Image();
+rona.src = "SBH_covid3.png";
+
 // start animating
 animate();
 
@@ -166,9 +172,14 @@ function animate() {
     var object = objects[i];
     object.x -= spawnRateOfDescent;
     ctx.beginPath();
-    ctx.arc(object.x, object.y, 8, 0, Math.PI * 2);
+    //ctx.arc(object.x, object.y, 8, 0, Math.PI * 2);
     ctx.closePath();
-    ctx.fillStyle = object.type;
+    if (object.type === "blue") {
+      ctx.drawImage(mask, object.x, object.y, 100, 100);
+    } else {
+      ctx.drawImage(rona, object.x, object.y, 100, 100);
+    }
+    //ctx.fillStyle = object.type;
     ctx.fill();
   }
 }
