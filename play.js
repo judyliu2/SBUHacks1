@@ -3,6 +3,7 @@ function startGame() {
   char = new makeCharacter(30, 30, "#000000", 510, 300, 1);
   game.start();
 }
+
 var game = {
   canvas: document.createElement("canvas"),
   start: function () {
@@ -43,8 +44,11 @@ function makeCharacter(width, height, color, x, y, size) {
 function updateGame() {
   game.clear();
   char.update();
-  char.overlap(box);
   char.die();
+  game.context.fillStyle = 'gray';
+  game.context.fillRect(50, 20, 100, 50);
+  game.context.fillStyle = 'black';
+  game.context.strokeText("Return", 30, 20);
 }
 
 //cant move backwards
@@ -67,7 +71,7 @@ function moveright() {
 }
 
 document.onkeydown = function (e) {
-  switch (e.keyCode) {
+  switch (e) {
     case 37: //left
       moveleft();
       break;
@@ -83,3 +87,16 @@ document.onkeydown = function (e) {
   }
 };
 
+// Return to homepage
+returnbutton = [30, 20, 100, 50];
+game.canvas.addEventListener('click', function(event) {
+  if (
+    event.x > returnbutton[0] &&
+    event.x < returnbutton[0] + returnbutton[2] &&
+    event.y > returnbutton[1] &&
+    event.y < returnbutton[1] + returnbutton[3]
+  ){
+    location.href = "index.html";
+  }
+  //console.log([event.x, event.y]);
+});
