@@ -1,6 +1,6 @@
 var char;
 function startGame() {
-  char = new makeCharacter(30, 30, "gray", 510, 300, 1);
+  char = new makeCharacter(100, 180, "gray", 0, 0, 1);
   char.initializeCharacter();
   game.start();
 }
@@ -26,6 +26,30 @@ function withinBounds(aList, num) {
   return false;
 }
 
+function printMousePos(event) {
+  xOffset = 50;
+  yOffset = 50;
+  alert([event.x, event.y] + "\n char dude x:" + [char.x + xOffset, char.x + xOffset + char.width] 
+  + "  y:" + [char.y + yOffset, char.y + yOffset + char.height]);
+  if (withinBounds([char.x + xOffset, char.x + xOffset + char.width], event.x)
+    && withinBounds([char.y + yOffset, char.y + yOffset + char.height], event.y)){
+      alert("got");
+    }
+}
+
+function withinBounds(aList, num){
+  if (aList[0] < num && num < aList[1]){
+    return true;
+  }
+  return false;
+}
+
+document.addEventListener("click", printMousePos);
+
+
+
+/*         Character Creation        */
+
 function makeCharacter(width, height, color, x, y, size) {
   this.width = width;
   this.height = height;
@@ -33,6 +57,7 @@ function makeCharacter(width, height, color, x, y, size) {
   this.y = y;
   this.health = 100;
   this.frame = 4;
+  this.hasCollided = false;
   this.images = [];
 
   this.initializeCharacter = function () {
@@ -43,7 +68,11 @@ function makeCharacter(width, height, color, x, y, size) {
   };
 
   this.update = function () {
+<<<<<<< HEAD
     objects.forEach((ele) => this.overlap(ele));
+=======
+    objects.forEach(ele => this.overlap(ele));
+>>>>>>> noble
     ctx = game.context;
     ctx.drawImage(this.images[this.frame], this.x, this.y);
   };
@@ -54,6 +83,7 @@ function makeCharacter(width, height, color, x, y, size) {
     yOffset = 50;
     charXRange = [char.x + xOffset, char.x + xOffset + char.width];
     charYRange = [char.y + yOffset, char.y + yOffset + char.height];
+<<<<<<< HEAD
     topLeft =
       withinBounds(charXRange, obj.x) && withinBounds(charYRange, obj.y);
     topRight =
@@ -67,6 +97,13 @@ function makeCharacter(width, height, color, x, y, size) {
       (topLeft || topRight || bottomLeft || bottomRight) &&
       !this.hasCollided
     ) {
+=======
+    topLeft = withinBounds(charXRange, obj.x) && withinBounds(charYRange, obj.y);
+    topRight = withinBounds(charXRange, obj.x + 50) && withinBounds(charYRange, obj.y);
+    bottomLeft = withinBounds(charXRange, obj.x) && withinBounds(charYRange, obj.y + 50);
+    bottomRight = withinBounds(charXRange, obj.x + 50) && withinBounds(charYRange, obj.y + 50);
+    if((topLeft || topRight || bottomLeft || bottomRight) && !this.hasCollided){
+>>>>>>> noble
       alert("collided");
       this.hasCollided = true;
     }
@@ -85,31 +122,30 @@ function updateGame() {
   char.die();
 }
 
-//cant move backwards
 function moveup() {
   if (char.y > 0) {
-    char.y -= 10;
+    char.y -= 5;
     char.frame = (char.frame + 1) % 5;
   }
 }
 
 function movedown() {
   if (char.y < canvas.height - 240) {
-    char.y += 10;
+    char.y += 5;
     char.frame = (char.frame + 1) % 5;
   }
 }
 
 function moveleft() {
   if (char.x > 0) {
-    char.x -= 10;
+    char.x -= 5;
     char.frame = (char.frame + 1) % 5;
   }
 }
 
 function moveright() {
   if (char.x < canvas.width - 200) {
-    char.x += 10;
+    char.x += 5;
     char.frame = (char.frame + 1) % 5;
   }
 }
@@ -141,12 +177,16 @@ document.onkeydown = function (e) {
       moveright();
       break;
   }
-  console.log(e);
+  //console.log(e);
 };
 
 function homepage() {
   location.href = "index.html";
 }
+
+
+
+/*         Object Creation        */
 
 // newly spawned objects start at Y=25
 var spawnLineY = 1500;
