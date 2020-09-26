@@ -5,7 +5,8 @@ function startGame() {
 }
 
 var game = {
-  canvas: document.createElement("canvas"),
+  canvas: document.getElementById("canvas"),
+  //canvas: document.createElement("canvas"),
   start: function () {
     this.canvas.width = 1440;
     this.canvas.height = 1080;
@@ -97,7 +98,6 @@ function homepage() {
   location.href = "index.html";
 }
 
-
 // newly spawned objects start at Y=25
 var spawnLineY = 1500;
 
@@ -105,7 +105,7 @@ var spawnLineY = 1500;
 var spawnRate = 1500;
 
 // set how fast the objects will fall
-var spawnRateOfDescent = 0.50;
+var spawnRateOfDescent = 0.5;
 
 // when was the last object spawned
 var lastSpawn = -1;
@@ -119,13 +119,11 @@ var startTime = Date.now();
 // start animating
 animate();
 
-
 function spawnRandomObject() {
-
   // select a random type for this new object
   var t;
 
-  if (Math.random() < 0.50) {
+  if (Math.random() < 0.5) {
     t = "red";
   } else {
     t = "blue";
@@ -139,33 +137,30 @@ function spawnRandomObject() {
     y: Math.random() * (canvas.width - 30) + 15,
     // set y to start on the line where objects are spawned
     x: spawnLineY,
-  }
+  };
 
   // add the new object to the objects[] array
   objects.push(object);
 }
 
-
-
 function animate() {
-
   // get the elapsed time
   var time = Date.now();
 
   // see if its time to spawn a new object
-  if (time > (lastSpawn + spawnRate)) {
+  if (time > lastSpawn + spawnRate) {
     lastSpawn = time;
     spawnRandomObject();
   }
 
+  //char.update();
   // request another animation frame
   requestAnimationFrame(animate);
 
-  // clear the canvas so all objects can be 
+  // clear the canvas so all objects can be
   // redrawn in new positions
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-
+  char.update();
   // move each object down the canvas
   for (var i = 0; i < objects.length; i++) {
     var object = objects[i];
@@ -176,5 +171,4 @@ function animate() {
     ctx.fillStyle = object.type;
     ctx.fill();
   }
-
 }
