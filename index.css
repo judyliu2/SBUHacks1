@@ -12,8 +12,7 @@ h1 {
   line-height: 244px;
   /* identical to box height */
 
-
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 #play {
@@ -22,15 +21,14 @@ h1 {
   height: 244px;
   left: 786px;
   top: 412px;
-  
+
   font-family: Mate;
   font-style: normal;
   font-weight: normal;
   font-size: 200px;
   line-height: 244px;
   /* identical to box height */
-  
-  
+
   color: #000000;
   position: absolute;
   width: 593px;
@@ -38,7 +36,7 @@ h1 {
   left: 731px;
   top: 394px;
 
-  background: #B95ED9;
+  background: #b95ed9;
   border-radius: 78px;
 }
 
@@ -48,13 +46,13 @@ h1 {
   height: 79px;
   left: 786px;
   top: 726px;
-  
+
   font-family: Mate;
   font-style: normal;
   font-weight: normal;
   font-size: 65px;
   line-height: 79px;
-  
+
   color: #000000;
   position: absolute;
   width: 563px;
@@ -62,10 +60,34 @@ h1 {
   left: 743.5px;
   top: 709px;
 
-  background: #1C4AC0;
+  background: #1c4ac0;
   border-radius: 78px;
-  
 }
+
+#QUIT {
+  position: absolute;
+  width: 470px;
+  height: 79px;
+  left: 786px;
+  top: 726px;
+
+  font-family: Mate;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 65px;
+  line-height: 79px;
+
+  color: #000000;
+  position: absolute;
+  width: 563px;
+  height: 112px;
+  left: 743.5px;
+  top: 709px;
+
+  background: #1c4ac0;
+  border-radius: 78px;
+}
+
 canvas {
   background-image: url("SBH_homepage 1.png");
 }
@@ -87,7 +109,6 @@ body {
   height: 1024px;
 }
 html {
-
   width: 1440px;
   height: 1024px;
 }
