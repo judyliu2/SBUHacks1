@@ -1,0 +1,28 @@
+body{
+  margin: 0;
+  padding: 0;
+}
+.wrapper {
+  position: relative;
+  background: url(SBH_homepage\ 1.png);
+  height: 100vh;
+  background-size: cover;
+  background-position:0 0 ;
+  background-repeat: repeat-x ;
+  -webkit-animation: moving .5s linear infinite;
+  animation: moving .5s linear infinite;
+}
+.img-area{
+  position: absolute;
+  bottom: 300px;
+  left: 350px;
+}
+
+@keyframes moving{
+  from{
+    background-position: 0 0;
+  }
+  to{
+    background-position:100% 0 ;
+  }
+}
